@@ -1,17 +1,6 @@
-(function(root, factory) {
-  	var startTime;
+(function(window){
 
-    if (typeof define === 'function' && define.amd) {
-      //AMD
-      define(factory);
-    } else if (typeof exports === 'object') {
-      //Node, CommonJS之类的
-      module.exports = factory();
-    } else {
-      //浏览器全局变量(root 即 window)
-      root.resLoader = factory(root);
-    }
-  }(this, function() {
+
     var isFunc = function(f) {
         return typeof f === 'function';
       }
@@ -27,6 +16,7 @@
         onProgress: null, //正在加载回调函数，传入参数currentIndex, total
         onComplete: null //加载完毕回调函数，传入参数total
       }
+      var i;
       if (config) {
         for (i in config) {
           this.option[i] = config[i];
@@ -39,13 +29,15 @@
       this.total = this.option.resources.length || 0; //资源总数
       this.currentIndex = 0; //当前正在加载的资源索引
     };
+    var startTime;
 
     resLoader.prototype.start = function() {
       this.status = 1;
       var _this = this;
       var baseUrl = this.option.baseUrl;
-      for (var i = 0, l = this.option.resources.length; i < l; i++) {
-        var r = this.option.resources[i],
+      var i,r,l,url;
+      for (i = 0, l = this.option.resources.length; i < l; i++) {
+          r = this.option.resources[i],
           url = '';
         if (r.indexOf('http://') === 0 || r.indexOf('https://') === 0) {
           url = r;
@@ -78,18 +70,22 @@
       // console.log(endTime-startTime);
       if (this.currentIndex === this.total) {
         if (isFunc(this.option.onComplete)) {
-        	var _this = this;
-        	if(this.option.ad===true){
-        		setTimeout(function(){
-        		 _this.option.onComplete(this.total);
-        		},this.option.adTime-(endTime-startTime));  
-        	}else{
-        		 _this.option.onComplete(this.total);
-        	}     	
+          var _this = this;
+          if(this.option.ad===true){
+            setTimeout(function(){
+             _this.option.onComplete(this.total);
+            },this.option.adTime-(endTime-startTime));  
+          }else{
+             _this.option.onComplete(this.total);
+          }       
         }
       }
     }
 
-    //暴露公共方法
-    return resLoader;
-  }));
+    window.resLoader = resLoader;
+    module.exports = resLoader;
+
+})(window);
+
+
+

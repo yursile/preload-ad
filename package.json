@@ -1,0 +1,23 @@
+{
+  "name": "preload-ad",
+  "version": "1.0.0",
+  "description": "a preload with advertisement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yursile/preload-ad.git"
+  },
+  "keywords": [
+    "adv",
+    "preload"
+  ],
+  "author": "yursile",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yursile/preload-ad/issues"
+  },
+  "homepage": "https://github.com/yursile/preload-ad#readme"
+}
