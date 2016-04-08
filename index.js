@@ -83,8 +83,9 @@
     }
 
     window.resLoader = resLoader;
-    module.exports = resLoader;
-
+    if(typeof exports!=="undefined") {
+      module.exports = resLoader;
+    }
 })(window);
 
 
